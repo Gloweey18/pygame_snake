@@ -7,13 +7,41 @@ if __name__ == "__main__":
     pygame.display.update()
     pygame.display.set_caption("GAME BY GLORIA")
     game_over = False
+    x1 = 200
+    y1 = 300
+    
+    x1_change = 0       
+    y1_change = 0
+ 
+    clock = pygame.time.Clock()
+    snake = (0,0,0)
+    back = (0, 255, 255)
     while not game_over:
         for event in pygame.event.get():
-            print(event)
             if event.type == pygame.QUIT:
                 game_over = True
-        
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    x1_change = -10
+                    y1_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    x1_change = 10
+                    y1_change = 0
+                elif event.key == pygame.K_UP:
+                    y1_change = -10
+                    x1_change = 0
+                elif event.key == pygame.K_DOWN:
+                    y1_change = 10
+                    x1_change = 0
     
+        x1 += x1_change
+        y1 += y1_change
+        dis.fill(back)
+        pygame.draw.rect(dis, snake, [x1, y1, 10, 10])
+    
+        pygame.display.update()
+    
+        clock.tick(30)
     pygame.quit()
     quit()
 
